@@ -93,7 +93,11 @@ const me = async (req, res) => {
 const index = async (req, res) => {
     try {
         const data = Math.floor(Math.random() * 71);
+<<<<<<< HEAD
         return res.render("blog-card", {
+=======
+        return res.render("blogEdit", {
+>>>>>>> 2b0ede956ca82d68a91a33a5300c5b1f4281500d
             message: "asdas",
             data
         })
