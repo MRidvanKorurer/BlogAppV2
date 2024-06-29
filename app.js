@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const conn = require("./db/connect");
 const authRoute = require("./routes/auth");
+const blogRoute = require("./routes/blog");
 
 
 dotenv.config();
@@ -19,6 +20,7 @@ app.use(express.json());
 
 // routing
 app.use("/api/auth", authRoute);
+app.use("/api/blog", blogRoute);
 
 
 app.listen(port, () => {
