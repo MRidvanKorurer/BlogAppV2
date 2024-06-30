@@ -3,7 +3,8 @@ const Book = require("../models/book");
 
 const indexPage = async (req, res) => {
     try {
-        res.status(200).render('index');
+        const books = await Book.find();
+        res.status(200).render('index', {books});
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
@@ -52,7 +53,7 @@ const bookPost = async (req, res) => {
         // Burada veritabanına kaydetme işlemini yapabilirsiniz
          await book.save();
 
-        res.status(201).send(`Kitap başarıyla kaydedildi: ${JSON.stringify(book)}`);
+        res.status(201).redirect("/book/getAll");
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
@@ -69,22 +70,23 @@ const bookPostGet = async (req, res) => {
 
 const bookDeleteGet = async (req, res) => {
    try{
-        res.status(200).render('bookDelete'); 
+        const book = await Book.findById(req.params.id);
+
+        res.status(200).render('bookDelete', {book}); 
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
 }
 
 const bookDelete = async (req, res) => {
-    const { id } = req.params;
 
     try {
-        const book = await Book.findOneAndDelete({ _id: id });
+        const book = await Book.findByIdAndDelete(req.params.id);
 
         if (!book) {
             return res.status(404).json({ hata: "Kitap bulunamadı" });
         }
-        res.status(200).redirect('/'); 
+        res.status(200).redirect('/book/getAll'); 
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
@@ -92,6 +94,7 @@ const bookDelete = async (req, res) => {
 
 const bookPut = async (req, res) => {
     try {
+<<<<<<< HEAD
         const bookId = req.params.id; // URL'den ID'yi alın
         const { baslik, altbaslik } = req.body; // Gövdeden başlık ve alt başlığı alın
     
@@ -105,6 +108,10 @@ const bookPut = async (req, res) => {
         //res.status(200).render('bookList', { books });
         res.status(200).redirect(`/books/${bookId}`);
 
+=======
+        const book = await Book.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        res.status(200).redirect(`/book/getAll`);
+>>>>>>> 192db75d0f5ace506c9991562913e3e479a59e80
     } catch (error) {
         // Hata durumunda JSON formatında hata mesajı döndür
         res.status(400).json({ hata: error.message });
@@ -114,7 +121,8 @@ const bookPut = async (req, res) => {
 
 const bookPutGet = async (req, res) => {
     try {
-        res.status(200).render("bookEdit");
+        const book = await Book.findById(req.params.id);
+        res.status(200).render("bookEdit", {book});
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }

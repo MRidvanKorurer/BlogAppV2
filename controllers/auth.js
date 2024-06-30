@@ -22,11 +22,7 @@ const register = async (req, res) => {
 
         const token = createJwtToken(newUser);
 
-        return res.render("register", {
-            message: "Kayıt işlemi başarılı",
-            newUser,
-            token
-        })
+        return res.redirect("/book/home")
 
 
     } catch (error) {
@@ -77,18 +73,12 @@ const login = async (req, res) => {
         const comparePassword = await bcrypt.compare(password, user.password);
 
         if(!comparePassword) {
-            return res.status(400).render("failed", {
-                message: "Parola hatalı",
-            })
+            return res.redirect("/book/home");
         }
 
         const token = createJwtToken(user);
 
-        return res.status(200).render("success", {
-            message: "Giriş işlemi başarılı",
-            user,
-            token
-        })
+        return res.redirect("/book/home");
     } catch (error) {
         return res.status(400).json({
             message: "Giriş işlemi başarısız"
@@ -142,19 +132,5 @@ const me = async (req, res) => {
  *                   type: string
  *                   example: İşlem başarısız
  */
- const index = async (req, res) => {
-     try {
-         const data = Math.floor(Math.random() * 71);
-
-        return res.render("index", {
-            message: "asdas",
-            data
-        });
-    } catch (error) {
-        return res.status(400).json({
-            message: "İşlem başarısız"
-        });
-    }
-}
 
 module.exports = {register, login, me, registerGet, loginGet};

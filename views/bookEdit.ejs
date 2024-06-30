@@ -9,28 +9,45 @@
     <%- include("./partials/navbar.ejs") %>
 </head>
 <body>
+    <div class="card container w-25 text-center p-4 mt-5 bg-success">
+        <div class=" text-white fw-bold">
+            Kitap Güncelle Sayfası
+        </div>
+    </div>
     <div class="container mt-3">
+<<<<<<< HEAD
         <form method="post" action="/book/edit" >
+=======
+        <form method="post" action="/book/edit/<%= book._id %>">
+>>>>>>> 192db75d0f5ace506c9991562913e3e479a59e80
             <div class="row my-5 gx-5">
                 <div class="col-md-10">
                     <input type="hidden" name="blogid">
-                    <input type="hidden" name="resim">
                     <div class="row mb-3">
                         <label for="baslik" class="col-sm-1 col-form-label">Başlık</label>
                         <div class="col-sm-11">
+<<<<<<< HEAD
                             <input type="text" class="form-control" id="baslik" name="baslik" value="">
+=======
+                            <input type="text" class="form-control" id="baslik" name="baslik" value="<%= book.baslik %>" >
+>>>>>>> 192db75d0f5ace506c9991562913e3e479a59e80
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="altbaslik" class="col-sm-1 col-form-label">Alt Başlık</label>
                         <div class="col-sm-11">
+<<<<<<< HEAD
                             <textarea name="altbaslik" class="form-control" rows="5"></textarea>
+=======
+                            <textarea name="altbaslik" id="altbaslik" class="form-control" rows="5"><%= book.altbaslik %></textarea>
+>>>>>>> 192db75d0f5ace506c9991562913e3e479a59e80
                         </div>
                     </div>
                     
                     <div class="row mb-3">
                         <label for="aciklama" class="col-sm-1 col-form-label">Açıklama</label>
                         <div class="col-sm-11">
+<<<<<<< HEAD
                             <textarea id="editor" name="aciklama" class="form-control" rows="10"></textarea>
                         </div>
                     </div>
@@ -44,6 +61,14 @@
                     <div class="row mb-3">
                         <div class="col-sm-11 offset-sm-1">
                             <button type="submit" class="btn btn-success">Kaydet</button>
+=======
+                            <textarea id="aciklama" name="aciklama" class="form-control" rows="10" ><%= book.aciklama %></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3  ">
+                        <div class="col-sm-10 offset-sm-1 d-flex justify-content-center align-items-center ">
+                            <button type="submit" class="btn btn-success w-50 ">Kitab Güncelle</button>
+>>>>>>> 192db75d0f5ace506c9991562913e3e479a59e80
                         </div>
                     </div>
                    
