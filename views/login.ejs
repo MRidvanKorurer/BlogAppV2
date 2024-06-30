@@ -19,18 +19,18 @@
 </head>
 <body>
     <div class="form-container">
-        <form>
+        <form action="/auth/login" method="POST">
             <div class="form-group">
                 <label for="exampleInputEmail1">Email adresini giriniz</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Emailiniz">
+                <input type="email" class="form-control" name="email" id="email"" aria-describedby="emailHelp" placeholder="Emailiniz">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Parola giriniz</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Parolanız">
+                <input type="password" class="form-control" name="password" id="password" placeholder="Parolanız">
             </div>
             <div class="form-group form-check">    
             </div>
-            <button type="submit" class="btn btn-primary">Gönder</button>
+            <button type="submit" class="btn btn-success">Giriş Yap</button>
         </form>
     </div>
 </body>
