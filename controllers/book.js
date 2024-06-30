@@ -95,7 +95,7 @@ const bookPut = async (req, res) => {
         const { baslik, altbaslik } = req.body; // Gövdeden başlık ve alt başlığı alın
     
         // Verileri güncellemek için kitap modelinizi kullanın
-        const updatedBook = await updateBookById(bookId, { baslik, altbaslik });
+        const updatedBook = await updatedBook(bookId, { baslik, altbaslik });
     
         if (!updatedBook) {
           return res.status(404).json({ message: "Kitap bulunamadı" });
@@ -114,5 +114,4 @@ const bookPutGet = async (req, res) => {
         res.status(400).json({ hata: error.message });
     }
 }
-
 module.exports = { bookGet, bookGetid, bookPost, bookDelete, bookPut, indexPage, bookPostGet, bookDeleteGet, bookPutGet, bookSearch };
