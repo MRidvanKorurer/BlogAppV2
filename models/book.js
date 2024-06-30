@@ -6,7 +6,7 @@ const bookSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    altbaşlik:{
+    altbaslik:{
         type:String,
         required:true
     },

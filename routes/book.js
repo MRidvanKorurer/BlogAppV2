@@ -5,15 +5,15 @@ const {bookGet, bookGetid, bookPost, bookDelete, bookPut} = require("../controll
 const router = express.Router();
 
 
-router.get("/book",bookGet);
+router.get("/",bookGet);
 
-router.get("/book/:id",bookGetid);
+router.get("/:id",bookGetid);
 
-router.post("/book",bookPost);
+router.post("/",bookPost);
 
-router.delete("/book/:id",bookDelete);
+router.delete("/:id",bookDelete);
 
-router.put("/book/:id", bookPut);
+router.put("/:id", bookPut);
 
 
 module.exports = router;
