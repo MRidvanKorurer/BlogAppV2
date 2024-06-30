@@ -11,9 +11,10 @@ router.get("/home", indexPage);
 
 router.get("/single/:id",bookGetid);
 
+router.get("/create", bookPostGet);
+
 router.post("/create",bookPost);
 
-router.get("/create", bookPostGet);
 
 router.delete("/delete/:id",bookDelete);
 

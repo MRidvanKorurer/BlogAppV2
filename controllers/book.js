@@ -44,7 +44,7 @@ const bookPost = async (req, res) => {
         // Burada veritabanına kaydetme işlemini yapabilirsiniz
          await book.save();
 
-        res.status(200).send(`Kitap başarıyla kaydedildi: ${JSON.stringify(book)}`);
+        res.status(201).send(`Kitap başarıyla kaydedildi: ${JSON.stringify(book)}`);
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
@@ -52,7 +52,7 @@ const bookPost = async (req, res) => {
 
 const bookPostGet = async (req, res) => {
     try {
-        return res.status(200).render("/bookCreate");
+        return res.status(200).render("bookCreate");
     } catch (error) {
         return res.status(400).json({ hata: error.message });
     }
