@@ -18,10 +18,28 @@
                             <th style="width: 50px;">ID</th>
                             <th style="width: 150px;">Resim</th>
                             <th>Başlık</th>
+                            <th>Alt Başlık</th>
+                            <th>Açıklama</th>
                             <th>Kategori</th>
-                            <th style="width: 130px;"></th>
+                            <th style="width: 130px;">İşlemler</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <% books.forEach(book => { %>
+                        <tr>
+                            <td><%= book._id %></td>
+                            <td><img src="<%= book.resim %>" alt="Book Image" style="width: 100px;"></td>
+                            <td><%= book.baslik %></td>
+                            <td><%= book.altbaslik %></td>
+                            <td><%= book.aciklama %></td>
+                            <td><%= book.kategori %></td>
+                            <td>
+                                <a href="/editBook/<%= book._id %>" class="btn btn-primary btn-sm">Düzenle</a>
+                                <a href="/deleteBook/<%= book._id %>" class="btn btn-danger btn-sm">Sil</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
                 </table>
             </div>
         </div>

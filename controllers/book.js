@@ -39,25 +39,6 @@ const bookGetid = async (req, res) => {
     }
 }
 
-// const bookPost = async (req, res) => {
-//     try {
-//         let existingBook = await Book.findOne({ baslik: req.body.baslik });
-//         if (existingBook) {
-//             return res.status(400).json({ hata: "Bu başlığa sahip bir kitap zaten var" });
-//         }
-
-//         let book = new Book({
-//             baslik: req.body.baslik,
-//             altbaslik: req.body.altbaslik,
-//             aciklama: req.body.aciklama
-//         });
-
-//         await book.save();
-//         res.status(201).redirect('/books');
-//     } catch (error) {
-//         res.status(400).json({ hata: error.message });
-//     }
-// }
 
 
 const bookPost = async (req, res) => {
