@@ -118,9 +118,9 @@ const me = async (req, res) => {
  *                   type: string
  *                   example: İşlem başarısız
  */
-// const index = async (req, res) => {
-//     try {
-//         const data = Math.floor(Math.random() * 71);
+ const index = async (req, res) => {
+     try {
+         const data = Math.floor(Math.random() * 71);
 
         return res.render("index", {
             message: "asdas",
