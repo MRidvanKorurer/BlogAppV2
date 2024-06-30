@@ -11,8 +11,6 @@ router.post("/login", login);
 
 router.get("/me",authMiddleware, me);
 
-
-
 router.get("/index", index)
 
 

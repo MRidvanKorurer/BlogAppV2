@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const conn = require("./db/connect");
 const authRoute = require("./routes/auth");
+const bookRoute = require("./routes/book");
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./config/swagger');
 
@@ -23,6 +24,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // routing
 app.use("/api/auth", authRoute);
+
+app.use("/api/book",bookRoute)
 
 
 app.listen(port, () => {
