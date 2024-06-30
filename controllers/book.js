@@ -69,22 +69,23 @@ const bookPostGet = async (req, res) => {
 
 const bookDeleteGet = async (req, res) => {
    try{
-        res.status(200).render('bookDelete'); 
+        const book = await Book.findById(req.params.id);
+
+        res.status(200).render('bookDelete', {book}); 
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
 }
 
 const bookDelete = async (req, res) => {
-    const { id } = req.params;
 
     try {
-        const book = await Book.findOneAndDelete({ _id: id });
+        const book = await Book.findByIdAndDelete(req.params.id);
 
         if (!book) {
             return res.status(404).json({ hata: "Kitap bulunamadı" });
         }
-        res.status(200).redirect('/'); 
+        res.status(200).redirect('/book/getAll'); 
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }

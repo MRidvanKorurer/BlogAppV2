@@ -14,13 +14,12 @@
                 <div class="col-md-12 mt-3 text-center">
                    <div class="alert alert-secondary">
                     <p class="mb-3">
-                         Kitap kaydınızı silmek istiyor musunuz?
+                        "<%= book.baslik %>" Kitap kaydınızı silmek istiyor musunuz?
                     </p>
-                    <form method="post">
-                        <input type="hidden" name="_csrf" >
+                    <form action="/book/delete/<%= book._id %>" method="post" >
                         <input type="hidden" name="blogid" >
                         <button class="btn btn-danger" type="submit">Evet</button>
-                        <a href="/kitapsil" class="btn btn-primary">Vazgeç</a>
+                        <a href="/book/getAll" class="btn btn-primary">Vazgeç</a>
                     </form>
                    </div>
                 </div>

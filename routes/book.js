@@ -17,9 +17,9 @@ router.get("/create", bookPostGet);
 
 router.post("/create",bookPost);
 
-router.get("/delete", bookDeleteGet);
+router.get("/delete/:id", bookDeleteGet);
 
-router.delete("/delete/:id",bookDelete);
+router.post("/delete/:id",bookDelete);
 
 router.get("/edit", bookPutGet);
 
