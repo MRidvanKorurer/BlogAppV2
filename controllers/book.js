@@ -22,25 +22,43 @@ const bookGetid = async (req, res) => {
     }
 }
 
+// const bookPost = async (req, res) => {
+//     try {
+//         let existingBook = await Book.findOne({ baslik: req.body.baslik });
+//         if (existingBook) {
+//             return res.status(400).json({ hata: "Bu başlığa sahip bir kitap zaten var" });
+//         }
+
+//         let book = new Book({
+//             baslik: req.body.baslik,
+//             altbaslik: req.body.altbaslik,
+//             aciklama: req.body.aciklama
+//         });
+
+//         await book.save();
+//         res.status(201).redirect('/books');
+//     } catch (error) {
+//         res.status(400).json({ hata: error.message });
+//     }
+// }
+
+
 const bookPost = async (req, res) => {
     try {
-        let existingBook = await Book.findOne({ baslik: req.body.baslik });
-        if (existingBook) {
-            return res.status(400).json({ hata: "Bu başlığa sahip bir kitap zaten var" });
-        }
-
-        let book = new Book({
+        const book = new Book({
             baslik: req.body.baslik,
             altbaslik: req.body.altbaslik,
-            aciklama: req.body.aciklama
+            aciklama: req.body.aciklama,
+            resim: req.file ? req.file.filename : ''
         });
+        // Burada veritabanına kaydetme işlemini yapabilirsiniz
+         await book.save();
 
-        await book.save();
-        res.status(201).redirect('/books');
+        res.status(200).send(`Kitap başarıyla kaydedildi: ${JSON.stringify(book)}`);
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
-}
+};
 
 const bookDelete = async (req, res) => {
     const { id } = req.params;
