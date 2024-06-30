@@ -3,7 +3,8 @@ const Book = require("../models/book");
 
 const indexPage = async (req, res) => {
     try {
-        res.status(200).render('index');
+        const books = await Book.find();
+        res.status(200).render('index', {books});
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }

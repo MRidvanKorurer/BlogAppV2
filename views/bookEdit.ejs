@@ -9,6 +9,11 @@
     <%- include("./partials/navbar.ejs") %>
 </head>
 <body>
+    <div class="card container w-25 text-center p-4 mt-5 bg-success">
+        <div class=" text-white fw-bold">
+            Kitap Güncelle Sayfası
+        </div>
+    </div>
     <div class="container mt-3">
         <form method="post" enctype="multipart/form-data">
             <div class="row my-5 gx-5">
@@ -41,9 +46,9 @@
                             <input type="file" class="form-control" id="resim" name="resim">
                         </div>
                     </div>
-                    <div class="row mb-3">
-                        <div class="col-sm-11 offset-sm-1">
-                            <button type="submit" class="btn btn-success">Kaydet</button>
+                    <div class="row mb-3  ">
+                        <div class="col-sm-10 offset-sm-1 d-flex justify-content-center align-items-center ">
+                            <button type="submit" class="btn btn-success w-50 ">Kitab Güncelle</button>
                         </div>
                     </div>
                    
