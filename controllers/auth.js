@@ -22,7 +22,7 @@ const register = async (req, res) => {
 
         const token = createJwtToken(newUser);
 
-        return res.status(201).render("success", {
+        return res.render("register", {
             message: "Kayıt işlemi başarılı",
             newUser,
             token
@@ -36,6 +36,30 @@ const register = async (req, res) => {
     }
 }
 
+const registerGet = async (req, res) => {
+    try {
+        return res.render("register");
+
+
+    } catch (error) {
+        return res.status(400).json({
+            message: "Kayıt işlemi başarısız"
+        })
+    }
+}
+
+
+const loginGet = async (req, res) => {
+    try {
+        return res.render("login");
+
+
+    } catch (error) {
+        return res.status(400).json({
+            message: "Kayıt işlemi başarısız"
+        })
+    }
+}
 
 
 const login = async (req, res) => {
@@ -133,4 +157,4 @@ const me = async (req, res) => {
     }
 }
 
-module.exports = {register, login, me};
+module.exports = {register, login, me, registerGet, loginGet};
