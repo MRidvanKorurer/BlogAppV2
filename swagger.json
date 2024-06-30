@@ -1,0 +1,276 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "Kitap Uygulaması API",
+      "version": "1.0.0",
+      "description": "Bu API, kitap ekleme, düzenleme, silme ve listeleme işlemleri için kullanılır."
+    },
+    "servers": [
+      {
+        "url": "http://localhost:5000",
+        "description": "Local server"
+      }
+    ],
+    "paths": {
+      "/books": {
+        "get": {
+          "summary": "Tüm kitapları listele",
+          "description": "Sisteme kayıtlı olan tüm kitapları listeler.",
+          "responses": {
+            "200": {
+              "description": "Başarıyla kitap listesi alındı",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer",
+                          "example": 1
+                        },
+                        "title": {
+                          "type": "string",
+                          "example": "Harry Potter and the Philosopher's Stone"
+                        },
+                        "author": {
+                          "type": "string",
+                          "example": "J.K. Rowling"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Kitap bulunamadı"
+            }
+          }
+        },
+        "post": {
+          "summary": "Yeni kitap ekle",
+          "description": "Yeni bir kitap kaydı oluşturur.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Harry Potter and the Chamber of Secrets"
+                    },
+                    "author": {
+                      "type": "string",
+                      "example": "J.K. Rowling"
+                    }
+                  },
+                  "required": ["title", "author"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Başarıyla yeni kitap eklendi",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Yeni kitap başarıyla eklendi"
+                      },
+                      "book": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "title": {
+                            "type": "string",
+                            "example": "Harry Potter and the Chamber of Secrets"
+                          },
+                          "author": {
+                            "type": "string",
+                            "example": "J.K. Rowling"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Geçersiz istek"
+            }
+          }
+        }
+      },
+      "/books/{id}": {
+        "get": {
+          "summary": "Belirli bir kitabı getir",
+          "description": "Belirtilen ID'ye sahip kitabın detaylarını getirir.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Kitap ID"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Başarıyla kitap detayları alındı",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "example": 2
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Harry Potter and the Chamber of Secrets"
+                      },
+                      "author": {
+                        "type": "string",
+                        "example": "J.K. Rowling"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Kitap bulunamadı"
+            }
+          }
+        },
+        "put": {
+          "summary": "Belirli bir kitabı güncelle",
+          "description": "Belirtilen ID'ye sahip kitabın bilgilerini günceller.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Kitap ID"
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string",
+                      "example": "Harry Potter and the Chamber of Secrets (Updated Edition)"
+                    },
+                    "author": {
+                      "type": "string",
+                      "example": "J.K. Rowling"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Başarıyla kitap güncellendi",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Kitap başarıyla güncellendi"
+                      },
+                      "book": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "integer",
+                            "example": 2
+                          },
+                          "title": {
+                            "type": "string",
+                            "example": "Harry Potter and the Chamber of Secrets (Updated Edition)"
+                          },
+                          "author": {
+                            "type": "string",
+                            "example": "J.K. Rowling"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Geçersiz istek"
+            },
+            "404": {
+              "description": "Kitap bulunamadı"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Belirli bir kitabı sil",
+          "description": "Belirtilen ID'ye sahip kitabı siler.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "Kitap ID"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Başarıyla kitap silindi",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "example": "Kitap başarıyla silindi"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Kitap bulunamadı"
+            }
+          }
+        }
+      }
+    }
+  }
+  
