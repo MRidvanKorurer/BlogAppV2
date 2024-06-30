@@ -5,6 +5,7 @@ const authRoute = require("./routes/auth");
 const bookRoute = require("./routes/book");
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./config/swagger');
+const path = require("path");
 
 dotenv.config();
 
@@ -17,14 +18,15 @@ const port = process.env.PORT || 5000
 // middlewares
 app.set("view engine", "ejs");
 app.use(express.json());
+app.set('views', path.join(__dirname, 'views'));
 
 //var options = {explorer: true};
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 
 // routing
-app.use("/api/auth", authRoute);
-app.use("/api/book",bookRoute)
+app.use("/auth", authRoute);
+app.use("/book",bookRoute);
 
 
 app.listen(port, () => {

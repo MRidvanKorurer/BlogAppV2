@@ -1,9 +1,18 @@
 const Book = require("../models/book");
 
+
+const indexPage = async (req, res) => {
+    try {
+        res.status(200).render('index');
+    } catch (error) {
+        res.status(400).json({ hata: error.message });
+    }
+}
+
 const bookGet = async (req, res) => {
     try {
         const books = await Book.find();
-        res.status(200).render('books', { books });
+        res.status(200).render('bookList', { books });
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
@@ -17,11 +26,8 @@ const bookGetid = async (req, res) => {
         if (!book) {
           return res.status(404).json({ message: "Kitap bulunamadı" });
         }
-    
-        // Artık book nesnesine sahipsiniz
-    
-        return res.render("blogEdit", { book }); // book nesnesini şablona aktarın
-      }  catch (error) {
+        res.status(200).render('singleBlog', { book });
+    } catch (error) {
         res.status(400).json({ hata: error.message });
     }
 }
@@ -65,6 +71,14 @@ const bookPost = async (req, res) => {
     }
 };
 
+const bookPostGet = async (req, res) => {
+    try {
+        return res.status(200).render("/bookCreate");
+    } catch (error) {
+        return res.status(400).json({ hata: error.message });
+    }
+};
+
 const bookDelete = async (req, res) => {
     const { id } = req.params;
 
@@ -74,7 +88,7 @@ const bookDelete = async (req, res) => {
         if (!book) {
             return res.status(404).json({ hata: "Kitap bulunamadı" });
         }
-        res.status(200).redirect(`/books/${id}`);
+        res.status(200).redirect('/'); 
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
@@ -91,13 +105,11 @@ const bookPut = async (req, res) => {
         if (!updatedBook) {
           return res.status(404).json({ message: "Kitap bulunamadı" });
         }
-    
-        return res.status(200).json({ message: "Kitap güncellendi", book: updatedBook });
+        res.status(200).redirect(`/${id}`);
     } catch (error) {
         // Hata durumunda JSON formatında hata mesajı döndür
         res.status(400).json({ hata: error.message });
     }
 }
 
-
-module.exports = { bookGet, bookGetid, bookPost, bookDelete, bookPut };
+module.exports = { bookGet, bookGetid, bookPost, bookDelete, bookPut, indexPage, bookPostGet };

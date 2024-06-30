@@ -118,11 +118,11 @@ const me = async (req, res) => {
  *                   type: string
  *                   example: İşlem başarısız
  */
-const index = async (req, res) => {
-    try {
-        const data = Math.floor(Math.random() * 71);
+// const index = async (req, res) => {
+//     try {
+//         const data = Math.floor(Math.random() * 71);
 
-        return res.render("blogEdit", {
+        return res.render("index", {
             message: "asdas",
             data
         });
@@ -133,4 +133,4 @@ const index = async (req, res) => {
     }
 }
 
-module.exports = {register, login, me, index};
+module.exports = {register, login, me};
