@@ -24,7 +24,6 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // routing
 app.use("/api/auth", authRoute);
-
 app.use("/api/book",bookRoute)
 
 
