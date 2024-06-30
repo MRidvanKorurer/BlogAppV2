@@ -16,11 +16,12 @@ const bookGetid = async (req, res) => {
         if (!book) {
             return res.status(404).json({ hata: "Kitap bulunamadı" });
         }
-        res.status(200).render('book', { book });
+        res.status(200).render('blogEdit', { book }); // EJS dosyasına book objesini gönder
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
 }
+
 
 // const bookPost = async (req, res) => {
 //     try {
@@ -79,17 +80,33 @@ const bookPut = async (req, res) => {
     const { id } = req.params;
 
     try {
-        const book = await Book.findOneAndUpdate({ _id: id }, {
-            ...req.body
-        }, { new: true });
+        // Güncellenecek veriyi hazırla
+        const updatedBook = {
+            baslik: req.body.baslik,
+            altbaslik: req.body.altbaslik,
+            aciklama: req.body.aciklama
+        };
 
+        // Eğer yeni bir resim yüklenmişse güncel veriye ekle
+        if (req.file) {
+            updatedBook.resim = req.file.filename;
+        }
+
+        // Veritabanında güncelleme yap
+        const book = await Book.findOneAndUpdate({ _id: id }, updatedBook, { new: true });
+
+        // Kitap bulunamazsa hata döndür
         if (!book) {
             return res.status(404).json({ hata: "Kitap bulunamadı" });
         }
+
+        // Başarılı güncelleme durumunda yönlendir
         res.status(200).redirect(`/books/${id}`);
     } catch (error) {
+        // Hata durumunda JSON formatında hata mesajı döndür
         res.status(400).json({ hata: error.message });
     }
 }
+
 
 module.exports = { bookGet, bookGetid, bookPost, bookDelete, bookPut };

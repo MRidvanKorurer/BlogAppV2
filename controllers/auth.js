@@ -122,7 +122,7 @@ const index = async (req, res) => {
     try {
         const data = Math.floor(Math.random() * 71);
 
-        return res.render("index", {
+        return res.render("blogEdit", {
             message: "asdas",
             data
         });
