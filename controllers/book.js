@@ -47,7 +47,6 @@ const bookPost = async (req, res) => {
             baslik: req.body.baslik,
             altbaslik: req.body.altbaslik,
             aciklama: req.body.aciklama,
-            resim: req.file ? req.file.filename : ''
         });
         // Burada veritabanına kaydetme işlemini yapabilirsiniz
          await book.save();
