@@ -10,14 +10,18 @@ const bookGet = async (req, res) => {
 }
 
 const bookGetid = async (req, res) => {
-    const id = req.params.id;
     try {
-        const book = await Book.findById(id);
+        const bookId = req.params.id; // URL'de bir ID olduğundan varsayıyoruz
+        const book = await getBookById(bookId);
+    
         if (!book) {
-            return res.status(404).json({ hata: "Kitap bulunamadı" });
+          return res.status(404).json({ message: "Kitap bulunamadı" });
         }
-        res.status(200).render('blogEdit', { book }); // EJS dosyasına book objesini gönder
-    } catch (error) {
+    
+        // Artık book nesnesine sahipsiniz
+    
+        return res.render("blogEdit", { book }); // book nesnesini şablona aktarın
+      }  catch (error) {
         res.status(400).json({ hata: error.message });
     }
 }
@@ -70,38 +74,25 @@ const bookDelete = async (req, res) => {
         if (!book) {
             return res.status(404).json({ hata: "Kitap bulunamadı" });
         }
-        res.status(200).redirect('/books'); 
+        res.status(200).redirect(`/books/${id}`);
     } catch (error) {
         res.status(400).json({ hata: error.message });
     }
 }
 
 const bookPut = async (req, res) => {
-    const { id } = req.params;
-
     try {
-        // Güncellenecek veriyi hazırla
-        const updatedBook = {
-            baslik: req.body.baslik,
-            altbaslik: req.body.altbaslik,
-            aciklama: req.body.aciklama
-        };
-
-        // Eğer yeni bir resim yüklenmişse güncel veriye ekle
-        if (req.file) {
-            updatedBook.resim = req.file.filename;
+        const bookId = req.params.id; // URL'den ID'yi alın
+        const { baslik, altbaslik } = req.body; // Gövdeden başlık ve alt başlığı alın
+    
+        // Verileri güncellemek için kitap modelinizi kullanın
+        const updatedBook = await updateBookById(bookId, { baslik, altbaslik });
+    
+        if (!updatedBook) {
+          return res.status(404).json({ message: "Kitap bulunamadı" });
         }
-
-        // Veritabanında güncelleme yap
-        const book = await Book.findOneAndUpdate({ _id: id }, updatedBook, { new: true });
-
-        // Kitap bulunamazsa hata döndür
-        if (!book) {
-            return res.status(404).json({ hata: "Kitap bulunamadı" });
-        }
-
-        // Başarılı güncelleme durumunda yönlendir
-        res.status(200).redirect(`/books/${id}`);
+    
+        return res.status(200).json({ message: "Kitap güncellendi", book: updatedBook });
     } catch (error) {
         // Hata durumunda JSON formatında hata mesajı döndür
         res.status(400).json({ hata: error.message });
