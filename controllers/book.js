@@ -9,6 +9,14 @@ const indexPage = async (req, res) => {
     }
 }
 
+const bookSearch = async (req, res) => {
+    try {
+        res.status(200).render('bookSearch');
+    } catch (error) {
+        res.status(400).json({ hata: error.message });
+    }
+}
+
 const bookGet = async (req, res) => {
     try {
         const books = await Book.find();
@@ -77,6 +85,15 @@ const bookPostGet = async (req, res) => {
     }
 };
 
+
+const bookDeleteGet = async (req, res) => {
+   try{
+        res.status(200).render('bookDelete'); 
+    } catch (error) {
+        res.status(400).json({ hata: error.message });
+    }
+}
+
 const bookDelete = async (req, res) => {
     const { id } = req.params;
 
@@ -109,4 +126,12 @@ const bookPut = async (req, res) => {
     }
 }
 
-module.exports = { bookGet, bookGetid, bookPost, bookDelete, bookPut, indexPage, bookPostGet };
+const bookPutGet = async (req, res) => {
+    try {
+        res.status(200).render("bookEdit");
+    } catch (error) {
+        res.status(400).json({ hata: error.message });
+    }
+}
+
+module.exports = { bookGet, bookGetid, bookPost, bookDelete, bookPut, indexPage, bookPostGet, bookDeleteGet, bookPutGet, bookSearch };
