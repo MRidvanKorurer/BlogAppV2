@@ -15,35 +15,27 @@
         </div>
     </div>
     <div class="container mt-3">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" action="/book/edit/<%= book._id %>">
             <div class="row my-5 gx-5">
                 <div class="col-md-10">
                     <input type="hidden" name="blogid">
-                    <input type="hidden" name="resim">
                     <div class="row mb-3">
                         <label for="baslik" class="col-sm-1 col-form-label">Başlık</label>
                         <div class="col-sm-11">
-                            <input type="text" class="form-control" id="baslik" name="baslik" >
+                            <input type="text" class="form-control" id="baslik" name="baslik" value="<%= book.baslik %>" >
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="altbaslik" class="col-sm-1 col-form-label">Alt Başlık</label>
                         <div class="col-sm-11">
-                            <textarea name="altbaslik" class="form-control" rows="5"></textarea>
+                            <textarea name="altbaslik" id="altbaslik" class="form-control" rows="5"><%= book.altbaslik %></textarea>
                         </div>
                     </div>
                     
                     <div class="row mb-3">
                         <label for="aciklama" class="col-sm-1 col-form-label">Açıklama</label>
                         <div class="col-sm-11">
-                            <textarea id="editor" name="aciklama" class="form-control" rows="10"></textarea>
-                        </div>
-                    </div>
-                    <div class="row mb-3">
-                        <label for="resim" class="col-sm-1 col-form-label">Resim</label>
-                        <div class="col-sm-11">
-                            <img alt="" width="120">
-                            <input type="file" class="form-control" id="resim" name="resim">
+                            <textarea id="aciklama" name="aciklama" class="form-control" rows="10" ><%= book.aciklama %></textarea>
                         </div>
                     </div>
                     <div class="row mb-3  ">

@@ -21,9 +21,9 @@ router.get("/delete/:id", bookDeleteGet);
 
 router.post("/delete/:id",bookDelete);
 
-router.get("/edit", bookPutGet);
+router.get("/edit/:id", bookPutGet);
 
-router.put("/edit/:id", bookPut);
+router.post("/edit/:id", bookPut);
 
 
 module.exports = router;
