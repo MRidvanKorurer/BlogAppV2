@@ -101,10 +101,14 @@ const bookPut = async (req, res) => {
         if (!updatedBook) {
           return res.status(404).json({ message: "Kitap bulunamadı" });
         }
-        res.status(200).redirect(`/${id}`);
+        //res.status(200).redirect(`/${id}`);
+        //res.status(200).render('bookList', { books });
+        res.status(200).redirect(`/books/${bookId}`);
+
     } catch (error) {
         // Hata durumunda JSON formatında hata mesajı döndür
         res.status(400).json({ hata: error.message });
+        
     }
 }
 
