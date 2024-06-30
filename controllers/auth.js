@@ -87,22 +87,49 @@ const me = async (req, res) => {
         })
     }
 }
-
-
-
+/**
+ * @swagger
+ * /api/auth/index:
+ *   get:
+ *     summary: Ana sayfa veri getirme
+ *     description: Rastgele bir sayı üreterek ve mesaj göndererek index sayfasını render eder.
+ *     responses:
+ *       200:
+ *         description: İşlem başarılı, index sayfası render edildi.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: asdas
+ *                 data:
+ *                   type: integer
+ *                   example: 42
+ *       400:
+ *         description: İşlem başarısız
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: İşlem başarısız
+ */
 const index = async (req, res) => {
     try {
         const data = Math.floor(Math.random() * 71);
 
         return res.render("index", {
-
             message: "asdas",
             data
-        })
+        });
     } catch (error) {
         return res.status(400).json({
             message: "İşlem başarısız"
-        })
+        });
     }
 }
 
