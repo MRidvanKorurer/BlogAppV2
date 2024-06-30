@@ -27,11 +27,12 @@ const bookGet = async (req, res) => {
 }
 
 const bookGetid = async (req, res) => {
-    const id = req.params.id;
     try {
-        const book = await Book.findById(id);
+        const bookId = req.params.id; // URL'de bir ID olduğundan varsayıyoruz
+        const book = await getBookById(bookId);
+    
         if (!book) {
-            return res.status(404).json({ hata: "Kitap bulunamadı" });
+          return res.status(404).json({ message: "Kitap bulunamadı" });
         }
         res.status(200).render('singleBlog', { book });
     } catch (error) {
@@ -90,18 +91,19 @@ const bookDelete = async (req, res) => {
 }
 
 const bookPut = async (req, res) => {
-    const { id } = req.params;
-
     try {
-        const book = await Book.findOneAndUpdate({ _id: id }, {
-            ...req.body
-        }, { new: true });
-
-        if (!book) {
-            return res.status(404).json({ hata: "Kitap bulunamadı" });
+        const bookId = req.params.id; // URL'den ID'yi alın
+        const { baslik, altbaslik } = req.body; // Gövdeden başlık ve alt başlığı alın
+    
+        // Verileri güncellemek için kitap modelinizi kullanın
+        const updatedBook = await updatedBook(bookId, { baslik, altbaslik });
+    
+        if (!updatedBook) {
+          return res.status(404).json({ message: "Kitap bulunamadı" });
         }
         res.status(200).redirect(`/${id}`);
     } catch (error) {
+        // Hata durumunda JSON formatında hata mesajı döndür
         res.status(400).json({ hata: error.message });
     }
 }
@@ -113,5 +115,4 @@ const bookPutGet = async (req, res) => {
         res.status(400).json({ hata: error.message });
     }
 }
-
 module.exports = { bookGet, bookGetid, bookPost, bookDelete, bookPut, indexPage, bookPostGet, bookDeleteGet, bookPutGet, bookSearch };
