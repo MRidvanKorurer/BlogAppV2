@@ -94,7 +94,6 @@ const bookDelete = async (req, res) => {
 
 const bookPut = async (req, res) => {
     try {
-<<<<<<< HEAD
         const bookId = req.params.id; // URL'den ID'yi alın
         const { baslik, altbaslik } = req.body; // Gövdeden başlık ve alt başlığı alın
     
@@ -108,10 +107,10 @@ const bookPut = async (req, res) => {
         //res.status(200).render('bookList', { books });
         res.status(200).redirect(`/books/${bookId}`);
 
-=======
+
         const book = await Book.findByIdAndUpdate(req.params.id, req.body, {new: true});
         res.status(200).redirect(`/book/getAll`);
->>>>>>> 192db75d0f5ace506c9991562913e3e479a59e80
+
     } catch (error) {
         // Hata durumunda JSON formatında hata mesajı döndür
         res.status(400).json({ hata: error.message });
